@@ -1,20 +1,20 @@
-import React, { Component } from "react";
+import React, { Component, PureComponent } from "react";
 import Person from "./Person/Person";
 
-class Persons extends Component {
+class Persons extends PureComponent {
 
     componentWillUnmount() {
         console.log("[Persons.js] componentWillUnmount")
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        // update only if persons changed
-        if (nextProps.persons !== this.props.persons) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     // update only if persons changed
+    //     if (nextProps.persons !== this.props.persons) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     render() {
         console.log("[Persons.js] rendering");

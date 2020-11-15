@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styles from "./Person.module.css";
+import Aux from "../../Hoc/Aux";
 
 class Person extends Component {
 
@@ -26,11 +27,11 @@ class Person extends Component {
     render() {
         console.log("[Person.js] render");
         return (
-            <div className={styles.Person} >
+            <Aux>
                 <p onClick={this.props.click} > I'm {this.props.name} and a i am {this.props.age} years old!</p>
                 <p > {this.props.children}</p >
                 <input type="text" onChange={this.props.changed} value={this.props.name} />
-            </div >
+            </Aux>
         );
     }
 }

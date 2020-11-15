@@ -27,6 +27,7 @@ class App extends Component {
     ],
     otherState: 'some other value',
     showPersons: false,
+    showCockpit: true,
   };
 
   switchNameHandler = (newName) => {
@@ -80,14 +81,17 @@ class App extends Component {
 
     return (
       <div className={styles.App}>
-        <Cockpit
-          title={this.props.title}
-          persons={this.state.persons}
-          showPersons={this.state.showPersons}
-          togglePerson={this.togglePerson}
-        />
-        {persons}
-      </div>
+        {this.state.showCockpit ?
+          <Cockpit
+            title={this.props.title}
+            persons={this.state.persons}
+            showPersons={this.state.showPersons}
+            togglePerson={this.togglePerson}
+          />
+          : null}
+        <button onClick={() => this.setState({ showCockpit: false })} >Remove cockpit</button>
+        { persons}
+      </div >
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }

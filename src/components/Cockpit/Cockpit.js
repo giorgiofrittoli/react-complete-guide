@@ -8,8 +8,11 @@ const cockpit = (props) => {
         console.log("[Cockpit.js] useEffect");
         // http req
         setTimeout(() => {
-            alert("saved data to cloud");
+            console.log("saved");
         }, 100);
+        return () => {
+            console.log("cockpit cleaned up");
+        }
     }, [props.persons]);
 
     // triggered 1 time
@@ -17,8 +20,16 @@ const cockpit = (props) => {
         console.log("[Cockpit.js] useEffect");
         // http req
         setTimeout(() => {
-            alert("saved data to cloud");
+            console.log("saved");
         }, 100);
+    }, []);
+
+    // triggered every update cycle
+    useEffect(() => {
+        console.log("[Cockpit.js] useEffect");
+        return () => {
+            console.log("cockpit cleaned up every time");
+        }
     }, []);
 
     const assignedClasses = [];

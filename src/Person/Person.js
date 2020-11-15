@@ -2,6 +2,11 @@ import React from "react";
 import styles from "./Person.module.css";
 
 const person = (props) => {
+    const r = Math.random();
+
+    if (r > 0.7) {
+        throw new Error("Smt went wrong");
+    }
 
     return (
         <div className={styles.Person}>

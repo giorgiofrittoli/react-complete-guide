@@ -14,7 +14,7 @@ const cockpit = (props) => {
             clearTimeout(to);
             console.log("cockpit cleaned up");
         }
-    }, [props.persons]);
+    }, [props.length]);
 
     // triggered 1 time
     useEffect(() => {
@@ -36,11 +36,11 @@ const cockpit = (props) => {
     const assignedClasses = [];
     let btnClass = [classes.Button];
 
-    if (props.persons.length <= 2) {
+    if (props.length <= 2) {
         assignedClasses.push(classes.red);
     }
 
-    if (props.persons.length <= 1) {
+    if (props.length <= 1) {
         assignedClasses.push(classes.bold);
     }
 
@@ -58,4 +58,4 @@ const cockpit = (props) => {
     );
 }
 
-export default cockpit;
+export default React.memo(cockpit);

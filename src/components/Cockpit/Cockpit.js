@@ -58,4 +58,5 @@ const cockpit = (props) => {
     );
 }
 
+// re render only when props change
 export default React.memo(cockpit);

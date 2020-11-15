@@ -7,10 +7,11 @@ const cockpit = (props) => {
     useEffect(() => {
         console.log("[Cockpit.js] useEffect");
         // http req
-        setTimeout(() => {
+        const to = setTimeout(() => {
             console.log("saved");
         }, 100);
         return () => {
+            clearTimeout(to);
             console.log("cockpit cleaned up");
         }
     }, [props.persons]);

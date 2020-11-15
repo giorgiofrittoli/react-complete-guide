@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './App.module.css';
-import Person from '../components/Persons/Person/Person';
-import ErrorBounduary from '../components/ErrorBoundary/ErrorBounduary';
+import Persons from '../components/Persons/Persons';
+import Cockpit from "../components/Cockpit/Cockpit";
 
 class App extends Component {
   state = {
@@ -54,47 +54,20 @@ class App extends Component {
 
   render() {
 
-    let persons = null;
-    let btnClass = [styles.Button];
-
-    if (this.state.showPersons) {
-      persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            return (
-              <ErrorBounduary>
-                <Person
-                  key={person.id}
-                  click={() => this.deletePersonHandler(index)}
-                  changed={(event) => this.nameChangedHandler(event, person.id)}
-                  name={person.name}
-                  age={person.age} />
-              </ErrorBounduary>
-            );
-          })}
-        </div>
-      );
-
-      btnClass.push(styles.Red);
-
-    }
-
-    const assignedClasses = [];
-
-    if (this.state.persons.length <= 2) {
-      assignedClasses.push(styles.red);
-    }
-
-    if (this.state.persons.length <= 1) {
-      assignedClasses.push(styles.bold);
-    }
+    const persons = this.state.showPersons ?
+      <Persons
+        persons={this.state.persons}
+        click={this.deletePersonHandler}
+        changed={this.nameChangedHandler}
+      /> : null;
 
     return (
       <div className={styles.App}>
-        <h1>Hi, I'm a React App</h1>
-        <p className={assignedClasses.join(" ")}>This is really working!</p>
-        <button className={btnClass.join(" ")}
-          onClick={this.togglePerson}>Toggle persons</button>
+        <Cockpit
+          persons={this.state.persons}
+          showPersons={this.state.showPersons}
+          togglePerson={this.togglePerson}
+        />
         {persons}
       </div>
     );

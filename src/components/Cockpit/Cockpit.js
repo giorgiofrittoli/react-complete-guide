@@ -1,9 +1,10 @@
-import React, { useEffect, userRef } from "react";
+import React, { useEffect, useRef } from "react";
 import classes from "./Cockpit.module.css";
+import AuthContext from "../../context/auth-context";
 
 const cockpit = (props) => {
 
-    const toggleButtonRef = userRef(null);
+    const toggleButtonRef = useRef(null);
 
     // triggered when persons changes
     useEffect(() => {
@@ -22,7 +23,7 @@ const cockpit = (props) => {
     useEffect(() => {
 
         // ref is initialized, can use
-        this.toggleButtonRef.current.click();
+        toggleButtonRef.current.click();
 
         console.log("[Cockpit.js] useEffect");
         // http req
@@ -59,10 +60,13 @@ const cockpit = (props) => {
             <h1>{props.title}</h1>
             <p className={assignedClasses.join(" ")}>This is really working!</p>
             <button
-                ref={this.toggleButtonRef}
+                ref={toggleButtonRef}
                 className={btnClass.join(" ")}
                 onClick={props.togglePerson}
             >Toggle persons</button>
+            <AuthContext.Consumer>
+                {(context) => <button onClick={context.login}>Log in</button>}
+            </AuthContext.Consumer>
         </div>
     );
 }

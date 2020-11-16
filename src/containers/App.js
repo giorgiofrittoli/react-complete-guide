@@ -4,6 +4,7 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from "../components/Cockpit/Cockpit";
 import Aux from "../hoc/Aux";
 import withClass from "../hoc/withClass";
+import AuthContext from "../context/auth-context";
 
 class App extends Component {
 
@@ -31,6 +32,7 @@ class App extends Component {
     showPersons: false,
     showCockpit: true,
     changeCounter: 0,
+    auth: false,
   };
 
   switchNameHandler = (newName) => {
@@ -74,6 +76,10 @@ class App extends Component {
     this.setState({ showPersons: !isShow });
   }
 
+  loginHandler = () => {
+    this.setState({ auth: true });
+  }
+
   render() {
 
     console.log("[App.js] render");
@@ -87,16 +93,19 @@ class App extends Component {
 
     return (
       <Aux>
-        {this.state.showCockpit ?
-          <Cockpit
-            title={this.props.title}
-            persons={this.state.persons.length}
-            showPersons={this.state.showPersons}
-            togglePerson={this.togglePerson}
-          />
-          : null}
         <button onClick={() => this.setState({ showCockpit: false })} >Remove cockpit</button>
-        { persons}
+        <AuthContext.Provider
+          value={{ auth: this.state.auth, login: this.loginHandler }}>
+          {this.state.showCockpit ?
+            <Cockpit
+              title={this.props.title}
+              persons={this.state.persons.length}
+              showPersons={this.state.showPersons}
+              togglePerson={this.togglePerson}
+            />
+            : null}
+          {persons}
+        </AuthContext.Provider>
       </Aux >
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));

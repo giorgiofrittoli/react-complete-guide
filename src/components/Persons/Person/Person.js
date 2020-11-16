@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import classes from "./Person.module.css";
 import withClass from "../../../hoc/withClass";
+import AuthContext from "../../../context/auth-context";
 
 class Person extends Component {
 
@@ -37,17 +38,20 @@ class Person extends Component {
     render() {
         console.log("[Person.js] render");
         return (
-            <Fragment>
-                <p onClick={this.props.click} > I'm {this.props.name} and a i am {this.props.age} years old!</p>
-                <p > {this.props.children}</p >
-                <input
-                    //ref={(element) => { this.inputElement = element }}
-                    ref={this.inputElementRef}
-                    type="text"
-                    onChange={this.props.changed}
-                    value={this.props.name}
-                />
-            </Fragment>
+            <AuthContext.Consumer>
+                {(context) => <Fragment>
+                    {context.auth ? <p>Is Authenticated</p> : <p>please login</p>}
+                    <p onClick={this.props.click} > I'm {this.props.name} and a i am {this.props.age} years old!</p>
+                    <p > {this.props.children}</p >
+                    <input
+                        //ref={(element) => { this.inputElement = element }}
+                        ref={this.inputElementRef}
+                        type="text"
+                        onChange={this.props.changed}
+                        value={this.props.name}
+                    />
+                </Fragment>}
+            </AuthContext.Consumer>
         );
     }
 }

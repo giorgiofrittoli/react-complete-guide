@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, userRef } from "react";
 import classes from "./Cockpit.module.css";
 
 const cockpit = (props) => {
+
+    const toggleButtonRef = userRef(null);
 
     // triggered when persons changes
     useEffect(() => {
@@ -18,6 +20,10 @@ const cockpit = (props) => {
 
     // triggered 1 time
     useEffect(() => {
+
+        // ref is initialized, can use
+        this.toggleButtonRef.current.click();
+
         console.log("[Cockpit.js] useEffect");
         // http req
         setTimeout(() => {
@@ -52,8 +58,11 @@ const cockpit = (props) => {
         <div className="classes.">
             <h1>{props.title}</h1>
             <p className={assignedClasses.join(" ")}>This is really working!</p>
-            <button className={btnClass.join(" ")}
-                onClick={props.togglePerson}>Toggle persons</button>
+            <button
+                ref={this.toggleButtonRef}
+                className={btnClass.join(" ")}
+                onClick={props.togglePerson}
+            >Toggle persons</button>
         </div>
     );
 }
